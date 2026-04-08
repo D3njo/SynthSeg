@@ -20,14 +20,14 @@ License.
 
 # python imports
 import os
-import keras
+from tensorflow import keras
 import numpy as np
 import tensorflow as tf
-from keras import models
-import keras.layers as KL
-import keras.backend as K
-import keras.callbacks as KC
-from keras.optimizers import Adam
+from tensorflow.keras import models
+from tensorflow.keras import layers as KL
+from tensorflow.keras import backend as K
+from tensorflow.keras import callbacks as KC
+from tensorflow.keras.optimizers import Adam
 from inspect import getmembers, isclass
 
 # project imports

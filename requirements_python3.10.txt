@@ -1,0 +1,16 @@
+# SynthSeg 2.0 — Python 3.10+ dependencies
+# Replaces the old requirements_python3.8.txt (tensorflow-gpu==2.2 / keras==2.3)
+#
+# TensorFlow 2.15 is the last release that ships Keras 2.x as tf.keras.
+# It supports Python 3.10/3.11 and Apple Silicon (arm64) out of the box.
+# For Apple M1/M2/M3 GPU acceleration install the optional extra:
+#   pip install "SynthSeg[metal]"   or   pip install tensorflow-metal
+
+tensorflow==2.15.*
+# standalone keras package is replaced by tf.keras — do NOT install keras<3
+numpy>=1.24,<2.0
+scipy>=1.10
+h5py>=3.8
+nibabel>=5.0
+matplotlib>=3.7
+protobuf>=4.21,<5

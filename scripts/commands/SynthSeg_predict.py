@@ -66,6 +66,10 @@ else:
         version += ' (fast)'
 print('\n' + version + '\n')
 
+# suppress verbose TF / oneDNN startup messages
+os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '2')
+os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
+
 # enforce CPU processing if necessary
 if args['cpu']:
     print('using CPU, hiding all CUDA_VISIBLE_DEVICES')
@@ -79,6 +83,15 @@ else:
     print('using %s threads' % args['threads'])
 tf.config.threading.set_inter_op_parallelism_threads(args['threads'])
 tf.config.threading.set_intra_op_parallelism_threads(args['threads'])
+
+# enable memory growth so TF/Metal does not pre-allocate all available RAM.
+# critical on unified-memory systems (Apple Silicon) and low-RAM machines.
+gpus = tf.config.list_physical_devices('GPU')
+for gpu in gpus:
+    try:
+        tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError:
+        pass  # device already initialised — growth must be set before first use
 
 # path models
 if args['robust']:

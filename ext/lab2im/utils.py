@@ -64,8 +64,8 @@ import pickle
 import numpy as np
 import nibabel as nib
 import tensorflow as tf
-import keras.layers as KL
-import keras.backend as K
+from tensorflow.keras import layers as KL
+from tensorflow.keras import backend as K
 from datetime import timedelta
 from scipy.ndimage.morphology import distance_transform_edt
 
